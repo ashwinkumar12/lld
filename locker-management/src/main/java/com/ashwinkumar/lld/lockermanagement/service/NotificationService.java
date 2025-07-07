@@ -14,6 +14,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class NotificationService {
 
+    /**
+     * Notifies a locker user with an OTP for a specific slot using available contact methods.
+     *
+     * If both phone and email are valid, the OTP is sent via both SMS and email. If only one contact method is valid, the OTP is sent using that method. Logs a warning if contact information is incomplete and an error if no valid contact method is available.
+     */
     public void notifyUser(LockerUser user, String otp, Slot slot) {
         Contact contact = user.getContact();
         if (!contact.isComplete()) {
@@ -31,6 +36,11 @@ public class NotificationService {
         }
     }
     
+    /**
+     * Sends an OTP to the user's phone number via SMS if the phone number is valid.
+     *
+     * If the user's phone number is invalid, logs an error message instead of sending the OTP.
+     */
     public void notifyUserBySms(LockerUser user, String otp, Slot slot) {
         Contact contact = user.getContact();
         if (contact.hasValidPhone()) {
@@ -40,6 +50,11 @@ public class NotificationService {
         }
     }
     
+    /**
+     * Sends an OTP to the user's email address for the specified locker slot if the email is valid.
+     *
+     * If the user's email address is invalid, logs an error message instead of sending the notification.
+     */
     public void notifyUserByEmail(LockerUser user, String otp, Slot slot) {
         Contact contact = user.getContact();
         if (contact.hasValidEmail()) {

@@ -19,10 +19,20 @@ public class CabBookingService {
     private static final double ALLOWED_DISTANCE = 5;
     private DistanceCalculatorStrategy distanceCalculator;
 
+    /**
+     * Constructs a CabBookingService with the specified distance calculation strategy.
+     *
+     * @param distanceCalculator the strategy used to compute distances between locations
+     */
     public CabBookingService(DistanceCalculatorStrategy distanceCalculator) {
         this.distanceCalculator = distanceCalculator;
     }
 
+    /**
+     * Returns the list of all registered cabs in the system.
+     *
+     * @return the list of registered cabs
+     */
     public static List<Cab> getCabList() {
         return cabList;
     }
@@ -47,6 +57,14 @@ public class CabBookingService {
         return rider;
     }
 
+    /**
+     * Selects and returns the nearest available cab within the allowed distance from the specified start location for the given rider.
+     *
+     * @param rider the rider requesting a cab
+     * @param startLocation the pickup location for the ride
+     * @return the allocated Cab object
+     * @throws RuntimeException if no suitable cab is available
+     */
     private Cab allotACab(Rider rider, Location startLocation) {
 
         List<Cab> cabsInRange = getCabList().stream()

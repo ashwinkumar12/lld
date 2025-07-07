@@ -8,6 +8,13 @@ import com.ashwinkumar.lld.lockermanagement.service.NotificationService;
  */
 public class ContactDemo {
 
+    /**
+     * Demonstrates various scenarios of contact creation, validation, and notification sending using the updated Contact model with email support.
+     *
+     * Runs multiple demo cases including contacts with complete, phone-only, email-only, and invalid information, and showcases notification delivery via SMS and email.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         System.out.println("=== Contact Model with Email Demo ===\n");
 
@@ -67,6 +74,11 @@ public class ContactDemo {
         notificationService.notifyUserByEmail(testBuyer, "222222", dummySlot);
     }
 
+    /**
+     * Creates and returns a dummy Slot instance with preset identifiers and dimensions for demonstration purposes.
+     *
+     * @return a Slot object with fixed ID, size, and associated locker
+     */
     private static Slot createDummySlot() {
         // Create a dummy slot for demonstration
         Size size = new Size(10.0, 10.0);
