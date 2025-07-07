@@ -24,7 +24,11 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact{phone='" + phone + "', email='" + email + "'}";
+        if (isComplete()) {
+            return "Contact{phone='" + phone + "', email='" + email + "'}";
+        } else {
+            return "";
+        }
     }
 
 }
