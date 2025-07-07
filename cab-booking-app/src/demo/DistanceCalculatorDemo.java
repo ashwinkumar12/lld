@@ -6,6 +6,14 @@ import service.distance_calculator.DistanceCalculatorStrategy;
 
 public class DistanceCalculatorDemo {
     
+    /**
+     * Demonstrates the calculation and comparison of Euclidean and Manhattan distances between two points.
+     *
+     * This method creates two sample locations, computes their distances using both Euclidean and Manhattan metrics,
+     * and prints the results along with explanatory formulas and conceptual differences between the two distance measures.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         // Create two test locations
         Location locationA = new Location(0, 0);
