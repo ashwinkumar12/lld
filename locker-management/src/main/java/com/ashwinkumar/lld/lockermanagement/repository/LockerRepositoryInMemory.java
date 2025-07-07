@@ -7,6 +7,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
@@ -18,16 +19,23 @@ public class LockerRepositoryInMemory implements ILockerRepository {
         this.allLockers = new ArrayList<>();
     }
 
-    private Optional<Locker> getLocker(String lockerId) {
+    private Optional<Locker> getLocker(UUID lockerId) {
         return allLockers.stream().filter(locker -> locker.getId().equals(lockerId)).findFirst();
     }
 
     @Override
-    public Locker createLocker(String lockerId) {
-        if (!getLocker(lockerId).isPresent()) {
-            throw new RuntimeException();
+    public Locker createLocker(UUID lockerId) {
+        if (getLocker(lockerId).isPresent()) {
+            throw new RuntimeException("Locker with ID " + lockerId + " already exists");
         }
         Locker locker = new Locker(lockerId);
+        allLockers.add(locker);
+        return locker;
+    }
+
+    @Override
+    public Locker createLocker() {
+        Locker locker = new Locker();
         allLockers.add(locker);
         return locker;
     }

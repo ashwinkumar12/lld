@@ -2,7 +2,6 @@ package service;
 
 import model.*;
 import service.distance_calculator.DistanceCalculatorStrategy;
-import service.distance_calculator.EuclideanDistanceCalculator;
 import service.state_machine.BookedState;
 import service.state_machine.EmptyState;
 
@@ -18,6 +17,11 @@ public class CabBookingService {
     private static List<Trip> trips = new ArrayList<>();
 
     private static final double ALLOWED_DISTANCE = 5;
+    private DistanceCalculatorStrategy distanceCalculator;
+
+    public CabBookingService(DistanceCalculatorStrategy distanceCalculator) {
+        this.distanceCalculator = distanceCalculator;
+    }
 
     public static List<Cab> getCabList() {
         return cabList;
@@ -45,7 +49,6 @@ public class CabBookingService {
 
     private Cab allotACab(Rider rider, Location startLocation) {
 
-        DistanceCalculatorStrategy distanceCalculator = new EuclideanDistanceCalculator();
         List<Cab> cabsInRange = getCabList().stream()
                 .filter(cab -> cab.getDriver().isAvailable())
                 .filter(cab -> cab.getCabState().equals(Cab.state.EMPTY.toString()))
